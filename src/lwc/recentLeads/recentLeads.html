@@ -1,0 +1,44 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+
+    <lightning-card icon-name="standard:lead" title="Recent Leads">
+
+        <lightning-combobox
+                options={statusOptions}
+                onchange={onFilterChange}
+                value={selectedFilter}
+                class="slds-p-around_small"
+        ></lightning-combobox>
+
+        <template if:true={recentLeads}>
+            <ul class="slds-m-around_medium">
+                <template for:each={recentLeads} for:item="lead">
+                    <li key={lead.Id} class={lead.styleClass} data-id={lead.Id} onclick={onLeadClick}>
+                        <div class="slds-grid slds-m-vertical_small">
+
+                            <div class="slds-col slds-size_1-of-12">
+                                <!-- Flag column -->
+
+                                <template if:true={lead.levtrail__Flagged__c}>
+                                    <img src={flagIcon}>
+                                </template>
+                            </div>
+
+                            <div class="slds-col">
+                                <div>{lead.Name}</div>
+                                <div><img src={lead.timeIcon}> {lead.Status}</div>
+                            </div>
+
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+
+        <template if:false={recentLeads}>
+            There is not any records!
+        </template>
+    </lightning-card>
+</template>

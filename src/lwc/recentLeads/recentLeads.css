@@ -1,0 +1,9 @@
+.currentLead {
+    background: #007B39;
+    border-radius: 6px;
+}
+
+.liItem:hover {
+    background: #FFC5C5;
+    border-radius: 6px;
+}
